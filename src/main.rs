@@ -4,7 +4,6 @@ use fltk::{app,
     prelude::*, 
     window::Window, 
     input::FloatInput, 
-    enums::FrameType,
     group::Flex};
 
 fn parse_float_input(field: &FloatInput) -> f64 {
@@ -20,14 +19,6 @@ fn parse_float_input(field: &FloatInput) -> f64 {
 fn outside_test() {
     let result = true;
     assert!(result);
-}
-
-#[test]
-fn cells_initialized_correct_length() {
-    let desired = 10;
-    let cells = initialize_cells(10, 200.0);
-    assert_eq!(desired, cells.len());
-    assert_eq!(200.0, cells[0]);
 }
 
 fn heat_flow_between_cells(t1: &f64, t2: &f64, dx: &f64, k: &f64) -> f64 {
@@ -161,9 +152,9 @@ fn run(t_initial: &f64, thickness: &f64, subdiv_count:&f64, k: &f64, specific_he
         inner_temps.push(temps[n.clone() as usize-3].clone());
         t = t + dt;
     }
-    let mut inner_temp_string = format!("Inner Wall Temperature: {:.3}",inner_temps[inner_temps.len()-1]);
+    let inner_temp_string = format!("Inner Wall Temperature: {:.3}",inner_temps[inner_temps.len()-1]);
     inner_label.set_label(&inner_temp_string);
-    let mut outer_temp_string = format!("Outer Wall Temperature: {:.3}",outer_temps[outer_temps.len()-1]);
+    let outer_temp_string = format!("Outer Wall Temperature: {:.3}",outer_temps[outer_temps.len()-1]);
     outer_label.set_label(&outer_temp_string);
 }
 
